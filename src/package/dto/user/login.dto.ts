@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import {
   IsDefined,
   IsEnum,
@@ -6,6 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+
 import { Bool } from '../../enum/bool.enum';
 
 export class LoginDto {

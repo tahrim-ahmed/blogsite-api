@@ -4,14 +4,15 @@ import {
   ExceptionFilter,
   HttpStatus,
 } from '@nestjs/common';
-import { DtoValidationException } from '../exceptions/validations/dto-validation.exception';
-import { ValidationType } from '../exceptions/validations/validation-type.enum';
-import { BooleanValidationException } from '../exceptions/validations/boolean-validation.exception';
-import { UuidValidationException } from '../exceptions/validations/uuid-validation.exception';
-import { IntValidationException } from '../exceptions/validations/int-validation.exception';
+
+import { ErrorDto } from '../dto/response/error.dto';
 import { FieldErrorDto } from '../dto/response/field-error.dto';
 import { ResponseDto } from '../dto/response/response.dto';
-import { ErrorDto } from '../dto/response/error.dto';
+import { BooleanValidationException } from '../exceptions/validations/boolean-validation.exception';
+import { DtoValidationException } from '../exceptions/validations/dto-validation.exception';
+import { IntValidationException } from '../exceptions/validations/int-validation.exception';
+import { UuidValidationException } from '../exceptions/validations/uuid-validation.exception';
+import { ValidationType } from '../exceptions/validations/validation-type.enum';
 
 @Catch(
   DtoValidationException,

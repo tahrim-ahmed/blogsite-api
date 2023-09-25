@@ -1,9 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import { Repository } from 'typeorm';
-import { RoleEntity } from '../../../package/entities/user/role.entity';
-import { rolesObject } from '../../../package/json/user-role.json';
-import { RoleDto } from '../../../package/dto/user/role.dto';
+
+import { RoleDto } from '@/package/dto/user/role.dto';
+import { RoleEntity } from '@/package/entities/user/role.entity';
+import { rolesObject } from '@/package/json/user-role.json';
 
 @Injectable()
 export class RoleSeeder {

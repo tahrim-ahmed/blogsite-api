@@ -1,5 +1,7 @@
 import { Entity, JoinColumn, ManyToOne } from 'typeorm';
+
 import { CustomBaseEntity } from '../core/custom-base.entity';
+
 import { RoleEntity } from './role.entity';
 import { UserEntity } from './user.entity';
 

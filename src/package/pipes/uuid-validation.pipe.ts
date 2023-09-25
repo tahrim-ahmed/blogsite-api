@@ -5,7 +5,9 @@ import {
   ParseUUIDPipeOptions,
   PipeTransform,
 } from '@nestjs/common';
-import { isUUID } from '@nestjs/common/utils/is-uuid';
+
+import { isUUID } from 'class-validator';
+
 import { UuidValidationException } from '../exceptions/validations/uuid-validation.exception';
 
 @Injectable()

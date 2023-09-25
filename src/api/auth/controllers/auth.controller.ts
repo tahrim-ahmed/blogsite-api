@@ -1,13 +1,16 @@
 import { Body, Controller, HttpStatus, Post, Put } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+import { Public } from '@/package/decorators/public.decorator';
+import { ResponseDto } from '@/package/dto/response/response.dto';
+import { UserResponseDto } from '@/package/dto/response/user-response.dto';
+import { ChangePasswordDto } from '@/package/dto/user/change-password.dto';
+import { LoginDto } from '@/package/dto/user/login.dto';
+import { UserDto } from '@/package/dto/user/user.dto';
+import { DtoValidationPipe } from '@/package/pipes/dto-validation.pipe';
+import { ResponseService } from '@/package/services/response.service';
+
 import { AuthService } from '../services/auth.service';
-import { ResponseService } from '../../../package/services/response.service';
-import { DtoValidationPipe } from '../../../package/pipes/dto-validation.pipe';
-import { LoginDto } from '../../../package/dto/user/login.dto';
-import { UserResponseDto } from '../../../package/dto/response/user-response.dto';
-import { UserDto } from '../../../package/dto/user/user.dto';
-import { ChangePasswordDto } from '../../../package/dto/user/change-password.dto';
-import { ResponseDto } from '../../../package/dto/response/response.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -17,6 +20,7 @@ export class AuthController {
     private readonly responseService: ResponseService,
   ) {}
 
+  @Public()
   @Post('login')
   async login(
     @Body(

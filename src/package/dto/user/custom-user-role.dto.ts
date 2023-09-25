@@ -1,6 +1,8 @@
-import { RoleName } from '../../enum/role-name.enum';
 import { ApiProperty } from '@nestjs/swagger';
+
 import { IsEnum, IsNotEmpty } from 'class-validator';
+
+import { RoleName } from '../../enum/role-name.enum';
 
 export class CustomUserRoleDto {
   @ApiProperty({ enum: RoleName, enumName: 'role name' })

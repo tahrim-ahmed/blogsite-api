@@ -1,30 +1,26 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { configEnvironment } from './package/env-config/env-config';
-import { AuthMiddleware } from './package/middlewares/auth.middleware';
-import { publicUrls } from './public.url';
-import { configTypeorm } from './package/typeorm-config/typeorm.config';
+import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+
+import { AuthGuard } from '@/package/guard/auth.guard';
+import { CommonServiceModule } from '@/package/modules/common-service.module';
+import { EnvConfigModule } from '@/package/modules/env-config.module';
+import { TypeormConfigModule } from '@/package/modules/typeorm-config.module';
+
+import { AuthModule } from './api/auth/auth.module';
 import { RoleModule } from './api/role/role.module';
 import { UserModule } from './api/users/user.module';
-import { AuthModule } from './api/auth/auth.module';
 
 @Module({
   imports: [
-    configEnvironment(),
-    configTypeorm(),
+    EnvConfigModule,
+    TypeormConfigModule,
+    CommonServiceModule,
     EventEmitterModule.forRoot(),
     AuthModule,
     RoleModule,
     UserModule,
   ],
-  controllers: [],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .exclude(...publicUrls)
-      .forRoutes('*');
-  }
-}
+export class AppModule {}

@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CustomBaseEntity } from '../entities/core/custom-base.entity';
+
+import { CustomBaseEntity } from '@/package/entities/core/custom-base.entity';
 
 @Injectable()
 export class ExceptionService {

@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+
 import { RoleSeeder } from './role.seeder';
 import { UserSeeder } from './user.seeder';
 

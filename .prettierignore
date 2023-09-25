@@ -1,0 +1,5 @@
+.next
+.husky
+sw.js
+workbox*.js
+*d.ts

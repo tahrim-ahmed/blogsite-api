@@ -1,6 +1,8 @@
 import { Column, Entity, Index, JoinColumn, OneToMany } from 'typeorm';
-import { UserRoleEntity } from './user-role.entity';
+
 import { CustomBaseEntity } from '../core/custom-base.entity';
+
+import { UserRoleEntity } from './user-role.entity';
 
 @Entity({ name: 'roles' })
 @Index('roles-role-deletedat-idx', ['role', 'deletedAt'])

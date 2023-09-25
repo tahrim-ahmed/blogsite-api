@@ -1,22 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import * as jwt from 'jsonwebtoken';
-import { BcryptService } from '../../../package/services/bcrypt.service';
-import { UserService } from '../../users/service/user.service';
-import { LoginDto } from '../../../package/dto/user/login.dto';
-import { UserResponseDto } from '../../../package/dto/response/user-response.dto';
-import { UserDto } from '../../../package/dto/user/user.dto';
-import { SystemException } from '../../../package/exceptions/system.exception';
-import { UserRoleDto } from '../../../package/dto/user/user-role.dto';
-import { CustomUserRoleDto } from '../../../package/dto/user/custom-user-role.dto';
-import { RoleName } from '../../../package/enum/role-name.enum';
-import { ChangePasswordDto } from '../../../package/dto/user/change-password.dto';
-import * as fs from 'fs';
+
+import { UserService } from '@/api/users/service/user.service';
+import { UserResponseDto } from '@/package/dto/response/user-response.dto';
+import { ChangePasswordDto } from '@/package/dto/user/change-password.dto';
+import { CustomUserRoleDto } from '@/package/dto/user/custom-user-role.dto';
+import { LoginDto } from '@/package/dto/user/login.dto';
+import { UserDto } from '@/package/dto/user/user.dto';
+import { UserRoleDto } from '@/package/dto/user/user-role.dto';
+import { RoleName } from '@/package/enum/role-name.enum';
+import { SystemException } from '@/package/exceptions/system.exception';
+import { BcryptService } from '@/package/services/bcrypt.service';
+import { EnvConfigService } from '@/package/services/env-config.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly configService: ConfigService,
+    private readonly envConfigService: EnvConfigService,
     private readonly bcryptService: BcryptService,
     private readonly userService: UserService,
   ) {}
@@ -106,7 +107,7 @@ export class AuthService {
     userResponseDto.isAdmin = isAdmin;
     userResponseDto.isUser = isUser;
 
-    userResponseDto.paymentStatus = userDto.payment;
+    //userResponseDto.paymentStatus = userDto.payment;
 
     return Promise.resolve(userResponseDto);
   }
@@ -114,21 +115,11 @@ export class AuthService {
   /************* relation setter ***************/
 
   async generateToken(payload: any, isRemembered = 1): Promise<string> {
-    const privateKEY = fs.readFileSync('env/jwtRS256.key');
-
-    let accessToken;
-
-    if (isRemembered === 1) {
-      accessToken = jwt.sign({ ...payload }, privateKEY, {
-        expiresIn: '1d',
-        algorithm: 'RS256',
-      });
-    } else {
-      accessToken = jwt.sign({ ...payload }, privateKEY, {
-        expiresIn: '1h',
-        algorithm: 'RS256',
-      });
-    }
+    const atSecret = this.envConfigService.get<string>('JWT_SECRET');
+    const atExpiresIn = isRemembered ? 60 * 60 * 24 : 60 * 60 * 60 * 24;
+    const accessToken = jwt.sign(payload, atSecret, {
+      expiresIn: atExpiresIn,
+    });
     return Promise.resolve(accessToken);
   }
 

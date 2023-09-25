@@ -1,24 +1,24 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { plainToClass, plainToInstance } from 'class-transformer';
 import { REQUEST } from '@nestjs/core';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { plainToClass, plainToInstance } from 'class-transformer';
 import { Request } from 'express';
-import { UserEntity } from '../../../package/entities/user/user.entity';
-import { RoleEntity } from '../../../package/entities/user/role.entity';
-import { UserRoleEntity } from '../../../package/entities/user/user-role.entity';
-import { ResponseService } from '../../../package/services/response.service';
-import { ExceptionService } from '../../../package/services/exception.service';
-import { BcryptService } from '../../../package/services/bcrypt.service';
-import { RequestService } from '../../../package/services/request.service';
-import { UserResponseDto } from '../../../package/dto/response/user-response.dto';
-import { UserDto } from '../../../package/dto/user/user.dto';
-import { SystemException } from '../../../package/exceptions/system.exception';
-import { RoleName } from '../../../package/enum/role-name.enum';
-import { ChangePasswordDto } from '../../../package/dto/user/change-password.dto';
-import { DeleteDto } from '../../../package/dto/response/delete.dto';
-import { UserRoleDto } from '../../../package/dto/user/user-role.dto';
+import { Repository } from 'typeorm';
+
+import { DeleteDto } from '@/package/dto/response/delete.dto';
+import { UserResponseDto } from '@/package/dto/response/user-response.dto';
+import { ChangePasswordDto } from '@/package/dto/user/change-password.dto';
+import { UserDto } from '@/package/dto/user/user.dto';
+import { UserRoleDto } from '@/package/dto/user/user-role.dto';
+import { RoleEntity } from '@/package/entities/user/role.entity';
+import { UserEntity } from '@/package/entities/user/user.entity';
+import { UserRoleEntity } from '@/package/entities/user/user-role.entity';
+import { RoleName } from '@/package/enum/role-name.enum';
+import { SystemException } from '@/package/exceptions/system.exception';
+import { BcryptService } from '@/package/services/bcrypt.service';
+import { ExceptionService } from '@/package/services/exception.service';
+import { RequestService } from '@/package/services/request.service';
 
 @Injectable()
 export class UserService {
@@ -29,8 +29,6 @@ export class UserService {
     private readonly roleRepository: Repository<RoleEntity>,
     @InjectRepository(UserRoleEntity)
     private readonly userRoleRepository: Repository<UserRoleEntity>,
-    private readonly configService: ConfigService,
-    private readonly responseService: ResponseService,
     private readonly exceptionService: ExceptionService,
     private readonly bcryptService: BcryptService,
     private readonly requestService: RequestService,

@@ -1,4 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
+
 import { ValidationType } from './validation-type.enum';
 
 export class UuidValidationException extends BadRequestException {

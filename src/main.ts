@@ -1,20 +1,21 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
-import { SystemExceptionFilter } from './package/filters/system-exception.filter';
-import { FieldExceptionFilter } from './package/filters/field-exception.filter';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-export let NEST_APP: NestExpressApplication;
+import { join } from 'path';
+
+import { FieldExceptionFilter } from '@/package/filters/field-exception.filter';
+import { SystemExceptionFilter } from '@/package/filters/system-exception.filter';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('chronicle-api-bootstrap');
   logger.warn('Running in ' + process.env.NODE_ENV + ' mode');
 
-  NEST_APP = await NestFactory.create<NestExpressApplication>(AppModule);
+  const NEST_APP = await NestFactory.create<NestExpressApplication>(AppModule);
   NEST_APP.setGlobalPrefix('api/v1');
   NEST_APP.useGlobalFilters(new SystemExceptionFilter());
   NEST_APP.useGlobalFilters(new FieldExceptionFilter());

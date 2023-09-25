@@ -1,5 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToMany } from 'typeorm';
+
 import { CustomBaseEntity } from '../core/custom-base.entity';
+
 import { UserRoleEntity } from './user-role.entity';
 
 @Entity({ name: 'users' })

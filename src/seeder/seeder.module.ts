@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UserSeederModule } from './user/user-seeder.module';
-import { SeederService } from './seeder.service';
-import { configEnvironment } from '../package/env-config/env-config';
-import { configTypeorm } from '../package/typeorm-config/typeorm.config';
+
+import { EnvConfigModule } from '@/package/modules/env-config.module';
+import { TypeormConfigModule } from '@/package/modules/typeorm-config.module';
+import { SeederService } from '@/seeder/seeder.service';
+import { UserSeederModule } from '@/seeder/user/user-seeder.module';
 
 @Module({
-  imports: [configEnvironment(), configTypeorm(), UserSeederModule],
+  imports: [EnvConfigModule, TypeormConfigModule, UserSeederModule],
   providers: [SeederService],
 })
 export class SeederModule {}

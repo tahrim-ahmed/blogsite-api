@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+
 import { SeederModule } from './seeder.module';
 import { SeederService } from './seeder.service';
 

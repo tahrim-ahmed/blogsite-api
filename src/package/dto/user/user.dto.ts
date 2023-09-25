@@ -1,7 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { Exclude, Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+
 import { BaseDto } from '../core/base.dto';
+
 import { UserRoleDto } from './user-role.dto';
 
 export class UserDto extends BaseDto {

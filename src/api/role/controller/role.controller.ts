@@ -1,16 +1,18 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+import { ResponseDto } from '@/package/dto/response/response.dto';
+import { RoleDto } from '@/package/dto/user/role.dto';
+import { ResponseService } from '@/package/services/response.service';
+
 import { RoleService } from '../service/role.service';
-import { ResponseService } from '../../../package/services/response.service';
-import { ResponseDto } from '../../../package/dto/response/response.dto';
-import { RoleDto } from '../../../package/dto/user/role.dto';
 
 @ApiTags('Role')
 @ApiBearerAuth()
 @Controller('roles')
 export class RoleController {
   constructor(
-    private roleService: RoleService,
+    private readonly roleService: RoleService,
     private readonly responseService: ResponseService,
   ) {}
 

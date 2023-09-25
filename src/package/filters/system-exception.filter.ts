@@ -6,9 +6,10 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+
+import { ErrorDto } from '../dto/response/error.dto';
 import { ResponseDto } from '../dto/response/response.dto';
 import { SystemErrorDto } from '../dto/response/system-error.dto';
-import { ErrorDto } from '../dto/response/error.dto';
 
 @Catch(HttpException)
 export class SystemExceptionFilter implements ExceptionFilter {

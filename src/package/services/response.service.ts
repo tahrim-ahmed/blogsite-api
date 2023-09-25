@@ -1,10 +1,11 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { PayloadDto } from '../dto/response/payload.dto';
-import { PageResponseDto } from '../dto/pagination/page-response.dto';
-import { ResponseDto } from '../dto/response/response.dto';
+
 import { BaseDto } from '../dto/core/base.dto';
-import { FieldErrorDto } from '../dto/response/field-error.dto';
+import { PageResponseDto } from '../dto/pagination/page-response.dto';
 import { ErrorDto } from '../dto/response/error.dto';
+import { FieldErrorDto } from '../dto/response/field-error.dto';
+import { PayloadDto } from '../dto/response/payload.dto';
+import { ResponseDto } from '../dto/response/response.dto';
 import { SystemErrorDto } from '../dto/response/system-error.dto';
 
 @Injectable()
@@ -109,7 +110,7 @@ export class ResponseService {
 
     message = error.message ? error.message : message;
 
-    let errorDto = null;
+    let errorDto: ErrorDto;
     if (fieldErrors.length > 0) {
       errorDto = new ErrorDto(fieldErrors, null);
     } else {
