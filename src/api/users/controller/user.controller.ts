@@ -13,6 +13,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 
@@ -56,6 +57,31 @@ export class UserController {
   }
 
   @ApiBearerAuth()
+  @ApiQuery({
+    name: 'page',
+    required: true,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: true,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'sort',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'order',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+  })
   @Get('pagination')
   pagination(
     @Query('page', new IntValidationPipe()) page: number,
