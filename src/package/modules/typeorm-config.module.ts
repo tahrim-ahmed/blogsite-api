@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ClientEntity } from '@/package/entities/client/client.entity';
+import { ProductEntity } from '@/package/entities/product/product.entity';
 import { RoleEntity } from '@/package/entities/user/role.entity';
 import { UserEntity } from '@/package/entities/user/user.entity';
 import { UserRoleEntity } from '@/package/entities/user/user-role.entity';
@@ -21,7 +22,13 @@ import { UserRoleEntity } from '@/package/entities/user/user-role.entity';
         database: configService.get('DATABASE_DB'),
         synchronize: configService.get<boolean>('DATABASE_SYNCRONIZE'),
         logging: ['error', 'warn', 'info', 'schema', 'log'],
-        entities: [UserEntity, UserRoleEntity, RoleEntity, ClientEntity],
+        entities: [
+          UserEntity,
+          UserRoleEntity,
+          RoleEntity,
+          ClientEntity,
+          ProductEntity,
+        ],
       }),
       inject: [ConfigService],
     }),

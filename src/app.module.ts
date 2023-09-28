@@ -4,6 +4,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 
 import { AuthModule } from '@/api/auth/auth.module';
 import { ClientModule } from '@/api/client/client.module';
+import { ProductModule } from '@/api/product/product.module';
 import { RoleModule } from '@/api/role/role.module';
 import { UserModule } from '@/api/users/user.module';
 import { AuthGuard } from '@/package/guard/auth.guard';
@@ -21,6 +22,7 @@ import { TypeormConfigModule } from '@/package/modules/typeorm-config.module';
     RoleModule,
     UserModule,
     ClientModule,
+    ProductModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
 })
